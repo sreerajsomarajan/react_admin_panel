@@ -1,12 +1,17 @@
 import React, { Component } from "react";
-import '../styles/app.css';
+import { Admin, Resource } from 'react-admin';
+import restProvider from 'ra-data-simple-rest';
+import jsonServerProvider from 'ra-data-json-server';
+
+import { PostList, PostEdit, PostCreate, PostIcon } from './posts';
 
 class App extends Component {
   render() {
+    // <Admin dataProvider={restProvider('http://localhost:3000')}>
     return (
-      <div>
-        <h1>My React App!</h1>
-      </div>
+      <Admin dataProvider={jsonServerProvider('http://jsonplaceholder.typicode.com')}>
+        <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate} icon={PostIcon}/>
+      </Admin>
     );
   }
 }
